@@ -78,4 +78,16 @@ res.writeHead(404,{'Content-Type':'Application/json'})
 res.end(JSON.stringify({message:err}))
 }
 }
+
+//if there is no available route
+else{
+res.writeHead(404,{'Content-Type':'Application/json'})
+//send the error
+res.end(JSON.stringify({message:"Route not found"}))
+}
+})
+
+//listen to server
+server.listen(PORT,()=>{
+	console.log(`server listening on port: ${PORT}`)
 })
