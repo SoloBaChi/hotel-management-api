@@ -1,3 +1,5 @@
+
+
 const roomData = require('./data');
 
 class RoomController{
@@ -56,3 +58,5 @@ resolve(`room with the id ${id} has been succesfully deleted!`)
 })
 }
 }
+
+module.exports = new RoomController();
