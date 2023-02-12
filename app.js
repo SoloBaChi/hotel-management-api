@@ -32,7 +32,48 @@ res.end(JSON.stringify(room))
 }
 catch(err){
 //set the status code and content-type
-res.writeHead(400,{'Content-Type':'Application/json'})
+res.writeHead(404,{'Content-Type':'Application/json'})
+//send the error
+res.end(JSON.stringify({message:err}))
+}
+}
+
+
+// /api/room-types/:id :UPDATE
+else if(req.url.match(/\/api\/v1\/room-types\/([0-9]+)/) && req.method === 'PATCH'){
+try{
+//get id from the url
+const id  = req.url.split("/")[4];
+//get room
+const updatedTodo = await Room.updateRoom(id);
+//set status code and content-type
+res.writeHead(200,{'Content-Type':'Application/json'})
+//send the data
+res.end(JSON.stringify({updatedTodo}))
+}
+catch(err){
+//set the status code and content-type
+res.writeHead(404,{'Content-Type':'Application/json'})
+//send the error
+res.end(JSON.stringify({message:err}))
+}
+}
+
+// /api/room-types/:id :DELETE
+else if(req.url.match(/\/api\/v1\/room-types\/([0-9]+)/) && req.method === 'DELETE'){
+try{
+//get id from the url
+const id  = req.url.split("/")[4];
+//get room
+const message = await Room.deleteRoom(id);
+//set status code and content-type
+res.writeHead(200,{'Content-Type':'Application/json'})
+//send the data
+res.end(JSON.stringify({message}))
+}
+catch(err){
+//set the status code and content-type
+res.writeHead(404,{'Content-Type':'Application/json'})
 //send the error
 res.end(JSON.stringify({message:err}))
 }
